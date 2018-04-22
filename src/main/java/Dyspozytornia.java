@@ -2,28 +2,40 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.UUID.randomUUID;
 
 public class Dyspozytornia {
-    Map<String,Zgloszenie> mapaZgloszen = new HashMap<>();
+    Map<String, Zgloszenie> mapaZgloszen = new HashMap<>();
 
-    public void dodajZgloszenie(String tresc, TypZgloszenia typZgloszenia){
-//        - dodajZgloszenie(String tresc, TypZgloszenia typ):void
-//        - która tworzy nową instancję "Zgłoszenia" i dodaje je do mapy
-//                (spróbuj wymyślić unikalny identyfikator zgłoszenia)
-//        Wskazówka:  http://www.baeldung.com/java-uuid
-        Zgloszenie zgloszenie = new Zgloszenie(typZgloszenia,tresc,LocalTime.now());
-   mapaZgloszen.put(String.valueOf(randomUUID()),zgloszenie);
+    public void wypiszWszystkieZgłoszenia() {
+        mapaZgloszen.values().stream().forEach(zgloszenie -> System.out.println(zgloszenie));
     }
 
-  // public List<Zgloszenie> zwróćNajaktualniejszeZgłoszenia(){
-//        zwróćNajaktualniejszeZgłoszenia(int ilosc):List<Zgłoszenie> -
-// metoda która sortuje zgłoszenia po czasie i zwraca 'ilość' zgłoszeń z parametru.
 
- //   }
+    public void dodajZgloszenie(String tresc, TypZgloszenia typZgloszenia) {
+        Zgloszenie zgloszenie = new Zgloszenie(typZgloszenia, tresc, LocalTime.now());
+        mapaZgloszen.put(String.valueOf(randomUUID()), zgloszenie);
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+    }
 
-//   List<Zgloszenie> zwróćZgłoszeniaTypu(TypZgloszenia typZgloszenia){
-//
-//   }
+    public int zwróćNajaktualniejszeZgłoszenia(int limit) {
+
+        mapaZgloszen.values().stream()
+                .limit(limit)
+                .forEach(zgloszenie -> System.out.println(zgloszenie));
+        return limit;
+    }
+
+    List<Zgloszenie> zwróćZgłoszeniaTypu(TypZgloszenia typZgloszenia) {
+       return mapaZgloszen.values().stream()
+                .collect(Collectors.toList());
+    }
+
+
 }

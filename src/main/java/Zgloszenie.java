@@ -1,9 +1,9 @@
 import java.time.LocalTime;
 
 public class Zgloszenie {
-private TypZgloszenia typZgloszenia;
-private String treśćZgłoszenia;
-private LocalTime czasZgłoszenia;
+    private TypZgloszenia typZgloszenia;
+    private String treśćZgłoszenia;
+    private LocalTime czasZgłoszenia;
 
     public Zgloszenie(TypZgloszenia typZgloszenia, String treśćZgłoszenia, LocalTime czasZgłoszenia) {
         this.typZgloszenia = typZgloszenia;
